@@ -1,0 +1,66 @@
+Questão 1
+
+Alternativa Correta: d) A lista permanece inalterada
+
+Resolução: O código manipula ponteiros currA, currB e temp. Ambos currA e currB são inicializados para apontar para o primeiro nó (A). temp aponta para o segundo nó (B). As linhas currB->prox = currA->prox; e currA->prox = temp; essencialmente fazem A->prox = A->prox e A->prox = B, respectivamente. Como A->prox já apontava para B, nenhuma alteração real no encadeamento da lista ocorre.
+
+Questão 2
+
+Alternativa Correta: c) if (no_remover->prox != NULL) { no_remover->prox->ant = no_remover->ant; }
+
+Resolução: Para remover um nó de uma lista duplamente encadeada, é preciso atualizar os ponteiros prox do nó anterior e ant do nó posterior. A linha no_remover->ant->prox = no_remover->prox; (que estaria no if (no_remover->ant != NULL)) cuida do nó anterior. A alternativa (c) cuida do nó posterior, garantindo que ele aponte corretamente para o nó que antecedia o nó removido, mantendo a integridade da lista em ambos os sentidos.
+
+Questão 3
+
+Alternativa Correta: b) Trecho 2
+
+Resolução: O Trecho 2 é mais robusto e eficiente para a remoção em listas circulares. Ele encontra o nó anterior ao que será removido (atual), permitindo que a remoção seja feita em uma única passagem. Embora ambos os trechos tenham falhas no tratamento de listas com um único elemento que se tornam vazias, o Trecho 2 é conceitualmente superior e menos propenso a criar ciclos indesejados em cenários com múltiplos elementos.
+
+Questão 4
+
+Procedimento em C (Pseudocódigo):
+
+Plain Text
+
+
+void move_front_to_back(Fila *F) {
+    if (F->inicio == NULL) { // Fila vazia
+        return;
+    }
+
+    Elemento *primeiro_no = F->inicio;
+    F->inicio = primeiro_no->prox;
+
+    if (F->inicio == NULL) { // Se a fila ficou vazia após a remoção
+        F->fim = NULL;
+    }
+
+    // Reinsere no final
+    primeiro_no->prox = NULL;
+    if (F->fim == NULL) { // Se a fila estava vazia antes da reinserção
+        F->inicio = primeiro_no;
+        F->fim = primeiro_no;
+    } else {
+        F->fim->prox = primeiro_no;
+        F->fim = primeiro_no;
+    }
+}
+
+
+Efeito no caso de fila vazia ou com um único elemento:
+
+•
+Fila vazia: A função não faz nada e a fila permanece vazia.
+
+•
+Fila com um único elemento: O elemento é removido do início e reinserido no fim. A fila continua com um único elemento, que é o mesmo, mas o nó na memória pode ser diferente (se a alocação/desalocação for feita).
+
+Questão 5
+
+Alternativa Correta: d) A, B, E, F, G, D, C, H
+
+Resolução: A aplicação da Busca em Profundidade (DFS) a partir de 'A', visitando o menor vizinho em ordem alfabética, segue o caminho: A -> B (retorna) -> E (retorna). Após esgotar os vizinhos de A, a DFS continua a partir do próximo vértice não visitado em ordem alfabética, que é C. A partir de C, a exploração segue para F, depois G, depois D, e finalmente C e H. A sequência completa é A, B, E, F, G, D, C, H.
+
+
+
+
